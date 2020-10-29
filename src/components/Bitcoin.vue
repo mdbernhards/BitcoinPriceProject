@@ -9,33 +9,35 @@
         <section v-else>
             <div v-if="loading">Loading...</div>
             <div v-else>
-                <button v-on:click="isHiddenUSD = true; isHiddenEUR = false; isHiddenGBP = false; isHiddenLTL = false">USD</button>
-                <button v-on:click="isHiddenEUR = true; isHiddenUSD = false; isHiddenGBP = false; isHiddenLTL = false">EUR</button>
-                <button v-on:click="isHiddenGBP = true; isHiddenUSD = false; isHiddenEUR = false; isHiddenLTL = false">GBP</button>
-                <button v-on:click="isHiddenLTL = true; isHiddenEUR = false; isHiddenGBP = false; isHiddenUSD = false">LTL</button>
-                
-                <h1 v-if="isHiddenUSD"> 
+                <button v-on:click="isShown = 1">USD</button>
+                <button v-on:click="isShown = 2">EUR</button>
+                <button v-on:click="isShown = 3">GBP</button>
+                <button v-on:click="isShown = 4">LTL</button>
+
+                <h1 v-if="isShown == 0">...</h1>
+
+                <h1 v-if="isShown == 1"> 
                     {{info.USD.description}}:  
                     <span class="lighten">
                         <span v-html="info.USD.symbol"></span>{{ info.USD.rate_float | currencydecimal }}
                     </span>
                 </h1>
 
-                <h1 v-if="isHiddenEUR"> 
+                <h1 v-if="isShown == 2"> 
                     {{info.EUR.description}}:  
                     <span class="lighten">
                         <span v-html="info.EUR.symbol"></span>{{ info.EUR.rate_float | currencydecimal }}
                     </span>
                 </h1>
 
-                <h1 v-if="isHiddenGBP"> 
+                <h1 v-if="isShown == 3"> 
                     {{info.GBP.description}}:  
                     <span class="lighten">
                         <span v-html="info.GBP.symbol"></span>{{ info.GBP.rate_float | currencydecimal }}
                     </span>
                 </h1>
 
-                <h1 v-if="isHiddenLTL"> 
+                <h1 v-if="isShown == 4"> 
                     {{ltlinfo.LTL.description}}: Lt {{ ltlinfo.LTL.rate_float | currencydecimal }}
                 </h1>
 
@@ -55,7 +57,7 @@
                 ltlinfo: null,
                 loading: true,
                 errored: false,
-                isHiddenUSD: false,
+                isShown: 0,
                 isHiddenEUR: false,
                 isHiddenGBP: false,
                 isHiddenLTL: false
@@ -98,5 +100,7 @@
 </script>
 
 <style>
-
+ .button{
+     bottom: 100px;
+ }
 </style>
