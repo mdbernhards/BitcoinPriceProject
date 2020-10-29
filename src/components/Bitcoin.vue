@@ -14,8 +14,6 @@
                 <button v-on:click="isShown = 3">GBP</button>
                 <button v-on:click="isShown = 4">LTL</button>
 
-                <h1 v-if="isShown == 0">...</h1>
-
                 <h1 v-if="isShown == 1"> 
                     {{info.USD.description}}:  
                     <span class="lighten">
@@ -57,7 +55,7 @@
                 ltlinfo: null,
                 loading: true,
                 errored: false,
-                isShown: 0,
+                isShown: 1,
                 isHiddenEUR: false,
                 isHiddenGBP: false,
                 isHiddenLTL: false
