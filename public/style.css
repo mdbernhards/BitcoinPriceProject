@@ -20,12 +20,10 @@
         fill: url(#btcFill);
         fill-opacity: 0.5;
     }
-
+    
     .historyButtons {
-        position:relative;
-        top: 20px;
-        bottom: 10px;
-        right: 32.5%; 
+        position: relative;
+        right: 34%; 
     }
 
     button {

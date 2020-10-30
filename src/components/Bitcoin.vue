@@ -9,10 +9,10 @@
         <section v-else>
             <div v-if="loading">Loading...</div>
             <div v-else>
-                <button v-on:click="changeShown(1)">USD</button>
-                <button v-on:click="changeShown(2)">EUR</button>
-                <button v-on:click="changeShown(3)">GBP</button>
-                <button v-on:click="changeShown(4)">LTL</button>
+                <button v-on:click="changeShown(1), getPrices()">USD</button>
+                <button v-on:click="changeShown(2), getPrices()">EUR</button>
+                <button v-on:click="changeShown(3), getPrices()">GBP</button>
+                <button v-on:click="changeShown(4), getPrices()">LTL</button>
 
                 <h1 v-if="isShown == 1"> 
                     {{info.USD.description}}:  
@@ -70,6 +70,30 @@
             },
             changeShown(number){
                 this.isShown = number;
+            },
+            getPrices(){
+                axios
+                    .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+                    .then(response => {
+                        this.info = response.data.bpi;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false);
+
+                axios
+                    .get('https://api.coindesk.com/v1/bpi/currentprice/LTL.json')
+                    .then(response => {
+                        this.ltlinfo = response.data.bpi;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false);
+
             }
         },
         mounted () {
