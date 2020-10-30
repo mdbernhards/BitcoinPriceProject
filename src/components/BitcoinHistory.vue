@@ -40,13 +40,17 @@
         methods: {
             getDate(days, months, years, format){
                 return moment()
-                        .subtract(days, "days")
-                        .subtract(months, "months")
-                        .subtract(years, "years")
-                        .format(format)
+                    .subtract(days, "days")
+                    .subtract(months, "months")
+                    .subtract(years, "years")
+                    .format(format)
             },
             getLastWeeksData(){
                 var copyWeekDataset = [];
+                this.grid.verticalLinesNumber = 8;
+                this.labels.xLabels = [this.getDate(7, 0, 0, "DD/MM"), this.getDate(6, 0, 0, "DD/MM"), this.getDate(5, 0, 0, "DD/MM"),
+                                       this.getDate(4, 0, 0, "DD/MM"), this.getDate(3, 0, 0, "DD/MM"), this.getDate(2, 0, 0, "DD/MM"),
+                                       this.getDate(1, 0, 0, "DD/MM"), this.getDate(0, 0, 0, "DD/MM")];
 
                 axios
                     .get("https://api.coindesk.com/v1/bpi/historical/close.json?start=" + this.getDate(7, 0, 0, "YYYY-MM-DD") + "&end=" + this.getDate(0, 0, 0, "YYYY-MM-DD"))
@@ -57,13 +61,13 @@
                             this.dataset = copyWeekDataset;
                         }
                     });
-
-                this.labels.xLabels = [this.getDate(7, 0, 0, "DD/MM"), this.getDate(6, 0, 0, "DD/MM"), this.getDate(5, 0, 0, "DD/MM"),
-                                       this.getDate(4, 0, 0, "DD/MM"), this.getDate(3, 0, 0, "DD/MM"), this.getDate(2, 0, 0, "DD/MM"),
-                                       this.getDate(1, 0, 0, "DD/MM"), this.getDate(0, 0, 0, "DD/MM")];
             },
             getLastMonthsData(){
                 var copyMonthDataset = [];
+                this.grid.verticalLinesNumber = 7;
+                this.labels.xLabels = [this.getDate(30, 0, 0, "DD/MM"), this.getDate(25, 0, 0, "DD/MM"), this.getDate(20, 0, 0, "DD/MM"),
+                                       this.getDate(15, 0, 0, "DD/MM"), this.getDate(10, 0, 0, "DD/MM"), this.getDate(5,  0, 0, "DD/MM"),
+                                       this.getDate(0,  0, 0, "DD/MM")];
 
                 axios
                     .get("https://api.coindesk.com/v1/bpi/historical/close.json")
@@ -74,14 +78,15 @@
                             this.dataset = copyMonthDataset;
                         }
                     });
-
-                this.labels.xLabels = [this.getDate(30, 0, 0, "DD/MM"), this.getDate(25, 0, 0, "DD/MM"), this.getDate(20, 0, 0, "DD/MM"),
-                                       this.getDate(15, 0, 0, "DD/MM"), this.getDate(10, 0, 0, "DD/MM"), this.getDate(5,  0, 0, "DD/MM"),
-                                       this.getDate(0,  0, 0, "DD/MM")];
             },
             getLastYearsData(){
                 var copyYearDataset = [];
-                this.yearDataset = [];
+                this.grid.verticalLinesNumber = 13;
+                this.labels.xLabels = [this.getDate(0, 0, 1, "MM/YYYY"), this.getDate(0, 11, 0, "MM/YYYY"), this.getDate(0, 10, 0, "MM/YYYY"), 
+                                       this.getDate(0, 9, 0, "MM/YYYY"), this.getDate(0, 8,  0, "MM/YYYY"), this.getDate(0, 7,  0, "MM/YYYY"),
+                                       this.getDate(0, 6, 0, "MM/YYYY"), this.getDate(0, 5,  0, "MM/YYYY"), this.getDate(0, 4,  0, "MM/YYYY"),
+                                       this.getDate(0, 3, 0, "MM/YYYY"), this.getDate(0, 2,  0, "MM/YYYY"), this.getDate(0, 1,  0, "MM/YYYY"), 
+                                       this.getDate(0, 0, 0, "MM/YYYY")];
 
                 axios
                     .get("https://api.coindesk.com/v1/bpi/historical/close.json?start=" + this.getDate(0, 0, 1, "YYYY-MM-DD") + "&end=" + this.getDate(0, 0, 0, "YYYY-MM-DD"))
@@ -92,16 +97,13 @@
                             this.dataset = copyYearDataset;
                         }
                     });
-
-                this.labels.xLabels = [this.getDate(0, 0, 1, "MM/YYYY"), this.getDate(0, 11, 0, "MM/YYYY"), this.getDate(0, 10, 0, "MM/YYYY"), 
-                                       this.getDate(0, 9, 0, "MM/YYYY"), this.getDate(0, 8,  0, "MM/YYYY"), this.getDate(0, 7,  0, "MM/YYYY"),
-                                       this.getDate(0, 6, 0, "MM/YYYY"), this.getDate(0, 5,  0, "MM/YYYY"), this.getDate(0, 4,  0, "MM/YYYY"),
-                                       this.getDate(0, 3, 0, "MM/YYYY"), this.getDate(0, 2,  0, "MM/YYYY"), this.getDate(0, 1,  0, "MM/YYYY"), 
-                                       this.getDate(0, 0, 0, "MM/YYYY")];
             },
             getLastTenYearsData(){
                 var copyTenYearDataset = [];
-                this.tenYearDataset = [];
+                this.grid.verticalLinesNumber = 11;
+                this.labels.xLabels = [this.getDate(0, 0, 10, "MM/YYYY"),this.getDate(0, 0, 9, "MM/YYYY"),this.getDate(0, 0, 8, "MM/YYYY"),this.getDate(0, 0, 7, "MM/YYYY"),
+                                       this.getDate(0, 0,  6, "MM/YYYY"),this.getDate(0, 0, 5, "MM/YYYY"),this.getDate(0, 0, 4, "MM/YYYY"),this.getDate(0, 0, 3, "MM/YYYY"),
+                                       this.getDate(0, 0,  2, "MM/YYYY"),this.getDate(0, 0, 1, "MM/YYYY"),this.getDate(0, 0, 0, "MM/YYYY")];
                 
                 axios
                     .get("https://api.coindesk.com/v1/bpi/historical/close.json?start=" + this.getDate(0, 0, 10, "YYYY-MM-DD") + "&end=" + this.getDate(0, 0, 0, "YYYY-MM-DD"))
@@ -112,10 +114,6 @@
                             this.dataset = copyTenYearDataset;
                         }
                     });
-
-                this.labels.xLabels = [this.getDate(0, 0, 10, "MM/YYYY"),this.getDate(0, 0, 9, "MM/YYYY"),this.getDate(0, 0, 8, "MM/YYYY"),this.getDate(0, 0, 7, "MM/YYYY"),
-                                       this.getDate(0, 0,  6, "MM/YYYY"),this.getDate(0, 0, 5, "MM/YYYY"),this.getDate(0, 0, 4, "MM/YYYY"),this.getDate(0, 0, 3, "MM/YYYY"),
-                                       this.getDate(0, 0,  2, "MM/YYYY"),this.getDate(0, 0, 1, "MM/YYYY"),this.getDate(0, 0, 0, "MM/YYYY")];
             }
         },
         mounted() {
