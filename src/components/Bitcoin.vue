@@ -9,10 +9,10 @@
         <section v-else>
             <div v-if="loading">Loading...</div>
             <div v-else>
-                <button v-on:click="isShown = 1">USD</button>
-                <button v-on:click="isShown = 2">EUR</button>
-                <button v-on:click="isShown = 3">GBP</button>
-                <button v-on:click="isShown = 4">LTL</button>
+                <button v-on:click="changeShown(1)">USD</button>
+                <button v-on:click="changeShown(2)">EUR</button>
+                <button v-on:click="changeShown(3)">GBP</button>
+                <button v-on:click="changeShown(4)">LTL</button>
 
                 <h1 v-if="isShown == 1"> 
                     {{info.USD.description}}:  
@@ -67,6 +67,9 @@
         methods: {
             say: function (message) {
                 alert(message);
+            },
+            changeShown(number){
+                this.isShown = number;
             }
         },
         mounted () {
