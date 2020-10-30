@@ -1,0 +1,41 @@
+#history {
+    margin: 0 auto;
+    padding: 30px;
+    max-width: 1200px;
+    max-height: 300px;
+    }
+
+    .vtc {
+        height: 250px;
+        font-size: 12px;
+        @media (min-width: 699px) {
+        height: 350px;
+        }
+    }
+
+    .curve-btc {
+        stroke: #f69119;
+        stroke-width: 2;
+
+        fill: url(#btcFill);
+        fill-opacity: 0.5;
+    }
+
+    .historyButtons {
+        position:relative;
+        top: 20px;
+        bottom: 10px;
+        right: 32.5%; 
+    }
+
+    button {
+        margin: 2px;
+    }
+
+    #app {
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        color: #2c3e50;
+      }

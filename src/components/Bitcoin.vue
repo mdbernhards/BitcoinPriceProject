@@ -38,8 +38,6 @@
                 <h1 v-if="isShown == 4"> 
                     {{ltlinfo.LTL.description}}: Lt {{ ltlinfo.LTL.rate_float | currencydecimal }}
                 </h1>
-
-
             </div>
         </section>
     </div>
@@ -63,42 +61,36 @@
         },
         filters: {
             currencydecimal (value) {
-                return value.toFixed(2)
+                return value.toFixed(2);
             }
         },
         methods: {
             say: function (message) {
-                alert(message)
+                alert(message);
             }
         },
         mounted () {
             axios
                 .get('https://api.coindesk.com/v1/bpi/currentprice.json')
                 .then(response => {
-                    this.info = response.data.bpi
+                    this.info = response.data.bpi;
                 })
                 .catch(error => {
-                    console.log(error)
-                    this.errored = true
+                    console.log(error);
+                    this.errored = true;
                 })
-                .finally(() => this.loading = false)
+                .finally(() => this.loading = false);
 
             axios
                 .get('https://api.coindesk.com/v1/bpi/currentprice/LTL.json')
                 .then(response => {
-                    this.ltlinfo = response.data.bpi
+                    this.ltlinfo = response.data.bpi;
                 })
                 .catch(error => {
-                    console.log(error)
-                    this.errored = true
+                    console.log(error);
+                    this.errored = true;
                 })
-                .finally(() => this.loading = false)
+                .finally(() => this.loading = false);
         }
     }
 </script>
-
-<style>
- .button{
-     bottom: 100px;
- }
-</style>
