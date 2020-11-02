@@ -1,6 +1,6 @@
 #history {
     margin: 0 auto;
-    padding: 30px;
+    padding: 20px;
     max-width: 1200px;
     max-height: 300px;
     }
@@ -27,7 +27,29 @@
     }
 
     button {
-        margin: 2px;
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+
+    .date{
+        position: relative;
+        left: 8.5%;
+        color: lightslategray;
+    }
+
+    .currencyText{
+        margin-top: -15px;
+        margin-bottom: -30px;
+    }
+
+    .currencyButtons{
+        margin-bottom: 30px;
+    }
+
+    .graphInfo{
+        position: relative;
+        text-align: left;
+        left: 38%;
     }
 
     #app {

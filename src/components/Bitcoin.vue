@@ -1,5 +1,5 @@
 <template>
-    <div id="zap">
+    <div id="bitcoinPrice">
         <h1>Bitcoin Price</h1>
 
         <section v-if="errored">
@@ -9,35 +9,18 @@
         <section v-else>
             <div v-if="loading">Loading...</div>
             <div v-else>
-                <button @click="changeShown(1), getPrices()">USD</button>
-                <button @click="changeShown(2), getPrices()">EUR</button>
-                <button @click="changeShown(3), getPrices()">GBP</button>
-                <button @click="changeShown(4), getPrices()">LTL</button>
-
-                <h1 v-if="isShown == 1"> 
-                    {{info.USD.description}}:  
-                    <span class="lighten">
-                        <span v-html="info.USD.symbol"></span>{{ info.USD.rate_float | currencydecimal }}
-                    </span>
-                </h1>
-
-                <h1 v-if="isShown == 2"> 
-                    {{info.EUR.description}}:  
-                    <span class="lighten">
-                        <span v-html="info.EUR.symbol"></span>{{ info.EUR.rate_float | currencydecimal }}
-                    </span>
-                </h1>
-
-                <h1 v-if="isShown == 3"> 
-                    {{info.GBP.description}}:  
-                    <span class="lighten">
-                        <span v-html="info.GBP.symbol"></span>{{ info.GBP.rate_float | currencydecimal }}
-                    </span>
-                </h1>
-
-                <h1 v-if="isShown == 4"> 
-                    {{ltlinfo.LTL.description}}: Lt {{ ltlinfo.LTL.rate_float | currencydecimal }}
-                </h1>
+                <div class="currencyButtons">
+                    <button @click="changeCurrency('USD')">USD</button>
+                    <button @click="changeCurrency('EUR')">EUR</button>
+                    <button @click="changeCurrency('GBP')">GBP</button>
+                    <button @click="changeCurrency('LTL')">LTL</button>
+                </div>
+                <div class="currency">
+                    <span class="date">Current price:</span>
+                    <div class = "currencyText">
+                        <h1>{{currency.name}}: {{currency.simbol}} {{currency.price}}</h1>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
@@ -46,28 +29,44 @@
 <script lang="ts">
     import axios from "axios";
     export default{
-        el: '#zap',
+        el: '#bitcoinPrice',
         data () {
             return {
+                currency: {
+                    name: null,
+                    price: 1000,
+                    simbol: "$"
+                }, 
                 info: null,
                 ltlinfo: null,
                 loading: true,
-                errored: false,
-                isShown: 1,
-                isHiddenEUR: false,
-                isHiddenGBP: false,
-                isHiddenLTL: false
-            }
-        },
-        filters: {
-            currencydecimal (value: number) {
-                const decimalPlaces = 2
-                return value.toFixed(decimalPlaces);
+                errored: false
             }
         },
         methods: {
-            changeShown(shownCurrency: number){
-                this.isShown = shownCurrency;
+            changeCurrency(currencyShown: string){
+                this.getPrices();
+
+                if(currencyShown == "USD"){
+                    this.currency.name = this.info.USD.description;
+                    this.currency.price = this.info.USD.rate_float.toFixed(2);
+                    this.currency.simbol = "$";
+                }
+                else if(currencyShown == "EUR"){
+                    this.currency.name = this.info.EUR.description;
+                    this.currency.price = this.info.EUR.rate_float.toFixed(2);
+                    this.currency.simbol = "€";
+                }
+                else if(currencyShown == "GBP"){
+                    this.currency.name = this.info.GBP.description;
+                    this.currency.price = this.info.GBP.rate_float.toFixed(2);
+                    this.currency.simbol = "£";
+                }
+                else if(currencyShown == "LTL"){
+                    this.currency.name = this.ltlinfo.LTL.description;
+                    this.currency.price = this.ltlinfo.LTL.rate_float.toFixed(2);
+                    this.currency.simbol = "Lt";
+                }
             },
             getPrices(){
                 axios
@@ -91,25 +90,15 @@
                         this.errored = true;
                     })
                     .finally(() => this.loading = false);
-
             }
         },
         mounted () {
             axios
                 .get('https://api.coindesk.com/v1/bpi/currentprice.json')
                 .then(response => {
-                    this.info = response.data.bpi;
-                })
-                .catch(error => {
-                    console.log(error);
-                    this.errored = true;
-                })
-                .finally(() => this.loading = false);
-
-            axios
-                .get('https://api.coindesk.com/v1/bpi/currentprice/LTL.json')
-                .then(response => {
-                    this.ltlinfo = response.data.bpi;
+                    this.currency.name = response.data.bpi.USD.description;
+                    this.currency.price = response.data.bpi.USD.rate_float.toFixed(2);
+                    this.currency.simbol = "$";
                 })
                 .catch(error => {
                     console.log(error);

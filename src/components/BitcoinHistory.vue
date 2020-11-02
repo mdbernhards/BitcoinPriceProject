@@ -1,6 +1,6 @@
 <template>
     <div id="history">
-        <div id="historyGraphs">
+        <div>
             <trend-chart  v-if="dataset.length" :datasets="[{data: dataset, fill: true, className: 'curve-btc'}]" :labels="labels" :min="0" :grid="grid" :interactive="true" @mouse-move="onMouseMove"/>
         </div>
         <div class = "historyButtons">
@@ -9,7 +9,7 @@
             <button @click="getLastYearsData()">1 year</button>
             <button @click="getLastTenYearsData()">10 years</button>
         </div>
-        <h1>{{currentInfo.value}} {{currentInfo.label}}</h1>
+        <h1 class="graphInfo">{{currentInfo.value}}: ${{currentInfo.label}}</h1>
     </div>
 </template>
 
@@ -25,10 +25,11 @@
             return {
                 isShown: 4,
                 dataset: [],
-                allLabels: [], 
+                allLabels: [],
+                dataIndex: 0, 
                 currentInfo: {
-                    value: "000",
-                    label: "xxx"
+                    value: null,
+                    label: null
                 },
                 labels: {
                     xLabels: [],
