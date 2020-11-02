@@ -43,7 +43,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import axios from "axios";
     export default{
         el: '#zap',
@@ -60,16 +60,14 @@
             }
         },
         filters: {
-            currencydecimal (value) {
-                return value.toFixed(2);
+            currencydecimal (value: number) {
+                const decimalPlaces = 2
+                return value.toFixed(decimalPlaces);
             }
         },
         methods: {
-            say: function (message) {
-                alert(message);
-            },
-            changeShown(number){
-                this.isShown = number;
+            changeShown(shownCurrency: number){
+                this.isShown = shownCurrency;
             },
             getPrices(){
                 axios
