@@ -56,9 +56,9 @@
                 var copyWeekDataset = [];
                 this.allLabels = [];
                 this.grid.verticalLinesNumber = 8;
-                this.labels.xLabels = [this.getDate(7, 0, 0, "DD/MM"), this.getDate(6, 0, 0, "DD/MM"), this.getDate(5, 0, 0, "DD/MM"),
-                                       this.getDate(4, 0, 0, "DD/MM"), this.getDate(3, 0, 0, "DD/MM"), this.getDate(2, 0, 0, "DD/MM"),
-                                       this.getDate(1, 0, 0, "DD/MM"), this.getDate(0, 0, 0, "DD/MM")];
+                this.labels.xLabels = [this.getDate(8, 0, 0, "DD/MM"), this.getDate(7, 0, 0, "DD/MM"), this.getDate(6, 0, 0, "DD/MM"),
+                                       this.getDate(5, 0, 0, "DD/MM"), this.getDate(4, 0, 0, "DD/MM"), this.getDate(3, 0, 0, "DD/MM"),
+                                       this.getDate(2, 0, 0, "DD/MM"), this.getDate(1, 0, 0, "DD/MM")];
 
                 axios
                     .get("https://api.coindesk.com/v1/bpi/historical/close.json?start=" + this.getDate(8, 0, 0, "YYYY-MM-DD") + "&end=" + this.getDate(0, 0, 0, "YYYY-MM-DD"))
@@ -75,9 +75,9 @@
                 var copyMonthDataset = [];
                 this.allLabels = [];
                 this.grid.verticalLinesNumber = 7;
-                this.labels.xLabels = [this.getDate(30, 0, 0, "DD/MM"), this.getDate(25, 0, 0, "DD/MM"), this.getDate(20, 0, 0, "DD/MM"),
-                                       this.getDate(15, 0, 0, "DD/MM"), this.getDate(10, 0, 0, "DD/MM"), this.getDate(5,  0, 0, "DD/MM"),
-                                       this.getDate(0,  0, 0, "DD/MM")];
+                this.labels.xLabels = [this.getDate(31, 0, 0, "DD/MM"), this.getDate(26, 0, 0, "DD/MM"), this.getDate(21, 0, 0, "DD/MM"),
+                                       this.getDate(16, 0, 0, "DD/MM"), this.getDate(11, 0, 0, "DD/MM"), this.getDate(6,  0, 0, "DD/MM"),
+                                       this.getDate(1,  0, 0, "DD/MM")];
 
                 axios
                     .get("https://api.coindesk.com/v1/bpi/historical/close.json")
