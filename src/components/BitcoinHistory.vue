@@ -4,10 +4,10 @@
             <trend-chart  v-if="dataset.length" :datasets="[{data: dataset, fill: true, className: 'curve-btc'}]" :labels="labels" :min="0" :grid="grid" :interactive="true"/>
         </div>
         <div class = "historyButtons">
-            <button v-on:click="getLastWeeksData()">1 week</button>
-            <button v-on:click="getLastMonthsData()">1 month</button>
-            <button v-on:click="getLastYearsData()">1 year</button>
-            <button v-on:click="getLastTenYearsData()">10 years</button>
+            <button @click="getLastWeeksData()">1 week</button>
+            <button @click="getLastMonthsData()">1 month</button>
+            <button @click="getLastYearsData()">1 year</button>
+            <button @click="getLastTenYearsData()">10 years</button>
         </div>
     </div>
 </template>

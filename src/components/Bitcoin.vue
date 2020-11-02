@@ -9,10 +9,10 @@
         <section v-else>
             <div v-if="loading">Loading...</div>
             <div v-else>
-                <button v-on:click="changeShown(1), getPrices()">USD</button>
-                <button v-on:click="changeShown(2), getPrices()">EUR</button>
-                <button v-on:click="changeShown(3), getPrices()">GBP</button>
-                <button v-on:click="changeShown(4), getPrices()">LTL</button>
+                <button @click="changeShown(1), getPrices()">USD</button>
+                <button @click="changeShown(2), getPrices()">EUR</button>
+                <button @click="changeShown(3), getPrices()">GBP</button>
+                <button @click="changeShown(4), getPrices()">LTL</button>
 
                 <h1 v-if="isShown == 1"> 
                     {{info.USD.description}}:  
